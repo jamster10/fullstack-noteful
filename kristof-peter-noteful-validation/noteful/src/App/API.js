@@ -1,3 +1,4 @@
+import config from '../config'
 const BASE_URL = `http://localhost:8080/api`  
 
 function apiDelete(noteId) {
@@ -24,7 +25,7 @@ function apiPost(data){
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'BEARER abcde',
+              'Authorization': config.API_KEY,
           },
           body: jsonName
       };
@@ -37,7 +38,8 @@ function apiPost(data){
   const options = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': config.API_KEY,
         },
         body: jsonBody
     };

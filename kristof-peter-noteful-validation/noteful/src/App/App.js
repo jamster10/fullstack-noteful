@@ -70,10 +70,10 @@ class App extends Component {
      function getData(URL){
       return fetch(URL, {
         method: 'GET',
-        headers: new Headers({
-          'content-type': 'application/json',
-          'Authorization': 'BEARER abcde'
-        })
+        headers: {
+          "content-type": "application/json",
+          "authorization": config.API_KEY,
+        }
       }).then(res => {
           if (!res.ok) {
             return res.json().then(error => Promise.reject(error))
