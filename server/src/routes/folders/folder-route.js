@@ -10,9 +10,6 @@ const serializeFolder = folder => ({
   name: xss(folder.folder_name)
 });
 
-
-
-
 foldersRouter
   .route('/')
   .get((req, res, next) => {
@@ -37,7 +34,6 @@ foldersRouter
   .all( (req, res, next) => {
     const { folderId } = req.params;
     const db = req.app.get('db');
-    console.log(folderId)
     FoldersService.getNote(db, Number(folderId))
       .then(folder => {
         if (!folder){

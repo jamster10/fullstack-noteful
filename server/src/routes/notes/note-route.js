@@ -27,14 +27,18 @@ notesRouter
   .post(express.json(),(req, res, next) => {
     const db = req.app.get('db');
     const { name, content, folder_id } = req.body;
-    console.log(name,content);
-    console.log(folder_id);
+   
     if (!name || name.trim() === '' || name.length > 20 || !folder_id){
       return res.status(400).json({message: 'invalid'});
     }
-    NotesService.addNote(db, {note_name: name, content, folder_id: Number(folder_id)})
+    NotesService.addNote(db, {note_name: name, content, folder_id})
       .then(newNote => res.status(201).json(serializeNote(newNote)))
-      .catch(console.log);
+      .catch(err => {
+        if (err.code === '23503'){
+          return res.status(400).json({message: 'There was a problem handling your request. That folder does not exit'});
+        } else return res.status(500).json({message: 'There was a problme handling your request'});
+
+      });
   });
   
 

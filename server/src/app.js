@@ -11,9 +11,9 @@ const  validateToken  = require('./util/validateToken');
 const foldersRouter = require('./routes/folders/folder-route');
 const notesRouter = require('./routes/notes/note-route');
 
-//app.use(validateToken);
 app.use(helmet());
 app.use(cors(cors_Settings));
+app.use(validateToken);
 app.use(morgan(morgan_Settings));
 
 app.get('/', (req, res) => {
